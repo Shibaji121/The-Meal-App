@@ -1,0 +1,42 @@
+@media (max-width: 1200px) {
+  .search-bar {
+    left: 24rem;
+  }
+}
+@media (max-width: 992px) {
+  .user-detail {
+    padding: 0 1rem;
+  }
+  .search-bar {
+    left: 15rem;
+  }
+  #recipe-container {
+    flex-wrap: nowrap;
+  }
+  #recipe-container div {
+    width: 22vw;
+  }
+}
+@media (max-width: 800px) {
+  .search-bar {
+    width: 22rem;
+    left: 10rem;
+  }
+  #search-value-list {
+    width: 16.4rem;
+  }
+  #recipe-container {
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+  #recipe-container div {
+    width: 70vw;
+    margin: auto;
+  }
+}
+@media (max-width: 500px) {
+  .search-bar {
+    width: 22rem;
+    left: 3rem;
+  }
+}
