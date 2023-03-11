@@ -1,6 +1,7 @@
 const mealsList = document.getElementById("meal-cards");
 let favArr = JSON.parse(localStorage.getItem("Favourites"));
 
+// Fetching meal by ID
 const fetchById = (id) => {
   url = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + id;
   fetch(url)
@@ -18,6 +19,8 @@ const fetchById = (id) => {
       console.error("FETCH ERROR:", error);
     });
 };
+
+// Adding food cards after successfully fetching
 function addFoodCards(eleArr) {
   const item = document.createElement("div");
   item.className = "col-md-4";
@@ -44,6 +47,9 @@ function addFoodCards(eleArr) {
   </div>`;
   mealsList.append(item);
 }
+
+// Checking if any favourites is there or not
+// and then calling addFoodCards if favourites available
 function addFavourites() {
   if (favArr === null || favArr.length === 0 || favArr === undefined) {
     const item = document.createElement("div");
@@ -64,6 +70,8 @@ function addFavourites() {
     }
   }
 }
+
+// Function to remove meal from favourite list on clicking favourite button
 function toggleFavStyle(id) {
   Array.prototype.remove = function (value) {
     this.splice(this.indexOf(value), 1);
@@ -73,7 +81,11 @@ function toggleFavStyle(id) {
   mealsList.innerHTML = "";
   addFavourites();
 }
+
+// On clicking View Recipe button store the meal ID
 function storeIdInLocalStorage(id) {
   localStorage.setItem("MealID", id);
 }
+
+// Defaultly call this function on loading of Favourite page
 addFavourites();

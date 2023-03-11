@@ -4,7 +4,9 @@ const ingredientList = document.getElementById("ingredent");
 const recipeContainer = document.getElementById("recipe-container");
 let eleArray = [];
 
+// Function to Add Meal Detail on recipe page
 async function addMealDetail(id) {
+  // if directly some one go to recipe page or meal is invalid
   if (id === null || id === "") {
     recipeContainer.innerHTML = `
     <h1> Hey Buddy!! Please Select a Meal's View Recipe button to view the recipe </h1>
@@ -18,6 +20,8 @@ async function addMealDetail(id) {
     recipeContainer.style.fontFamily = "cursive";
     return;
   }
+
+  // Fetching meals by id
   const url = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + id;
   await fetch(url)
     .then((response) => {
@@ -44,6 +48,8 @@ async function addMealDetail(id) {
         </div>`;
   addIngreList(eleArray);
 }
+
+// function to add Ingredient list
 function addIngreList(array) {
   let heading = document.createElement("h2");
   heading.innerText = "Ingredients";
@@ -65,4 +71,5 @@ function addIngreList(array) {
   ingredientList.append(list);
 }
 
+// Default call on loading of recipe Page with parameter ID stored in local Storage
 addMealDetail(localStorage.getItem("MealID"));

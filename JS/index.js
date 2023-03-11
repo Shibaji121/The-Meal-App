@@ -3,6 +3,7 @@ const searchBar = document.getElementById("search-bar-box");
 const searchListBox = document.getElementById("search-value-list");
 let foodList = [];
 
+// Fetch Randomly Meal cards to show defaultly on Home Screen
 const fetchRandomly = () => {
   url = "https://www.themealdb.com/api/json/v1/1/random.php";
   fetch(url)
@@ -20,6 +21,8 @@ const fetchRandomly = () => {
       console.error("FETCH ERROR:", error);
     });
 };
+
+// Add Food Cards in HomePage
 function addFoodCards(eleArr) {
   const item = document.createElement("div");
   item.className = "col-md-4";
@@ -52,6 +55,7 @@ function addFoodCards(eleArr) {
   applyFavChange(eleArr[0].idMeal);
 }
 
+// Check the meal is favourite or not and then change style
 function applyFavChange(id) {
   if (
     localStorage.getItem("Favourites") !== null &&
@@ -62,16 +66,19 @@ function applyFavChange(id) {
   }
 }
 
+// Default Random fetch
 if (foodList.length === 0) {
   for (let i = 0; i < 9; i++) {
     fetchRandomly();
   }
 }
 
+// On clicking View Recipe button store the meal ID
 function storeIdInLocalStorage(id) {
   localStorage.setItem("MealID", id);
 }
 
+// Toggle Favourite button Style and edit stored Favourite array, on clicking on it
 function toggleFavourite(id) {
   let favArr = [];
   if (localStorage.getItem("Favourites") == null) {
@@ -97,6 +104,7 @@ function toggleFavourite(id) {
   }
 }
 
+// Fetch By Search Name to show in search list
 async function fetchBySearchName(name) {
   url = "https://www.themealdb.com/api/json/v1/1/search.php?s=" + name;
   await fetch(url)
@@ -116,6 +124,7 @@ async function fetchBySearchName(name) {
     });
 }
 
+// Add search results in the search result box
 function addSearchList(eleArr) {
   if (eleArr === null) {
     searchListBox.innerHTML = "";
@@ -133,6 +142,7 @@ function addSearchList(eleArr) {
   searchListBox.append(list);
 }
 
+// Event listener to check any search is going on to update the search result box
 searchBar.addEventListener("keyup", (e) => {
   if (e.target.value === "") {
     searchListBox.innerHTML = "";
@@ -143,15 +153,17 @@ searchBar.addEventListener("keyup", (e) => {
   }
 });
 
+// Event listener for removing the search result box by clicking any other place
 window.addEventListener("click", () => {
   searchListBox.innerHTML = "";
 });
 
+// Event listener to change the style of search Bar
 searchBar.addEventListener("click", () => {
-  searchListBox.innerHTML = "";
   searchBar.style.backgroundColor = "rgb(234, 234, 234)";
 });
 
+// Function to show searched Food Cards according to search criteria
 function addSearchFoodCards() {
   mealsList.innerHTML = "";
   if (foodList === null || foodList.length === 0) {
@@ -186,5 +198,6 @@ function addSearchFoodCards() {
   </div>`;
     applyFavChange(foodList[i].idMeal);
   }
+  // after search, scroll to view the searched list
   mealsList.scrollIntoView(true);
 }
