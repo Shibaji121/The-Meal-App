@@ -12,7 +12,6 @@ const fetchById = (id) => {
       }
     })
     .then((obj) => {
-      console.log(obj);
       addFoodCards(obj.meals);
     })
     .catch((error) => {
@@ -46,7 +45,7 @@ function addFoodCards(eleArr) {
   mealsList.append(item);
 }
 function addFavourites() {
-  if (favArr === null || favArr.length === 0) {
+  if (favArr === null || favArr.length === 0 || favArr === undefined) {
     const item = document.createElement("div");
     item.innerHTML = `
     <h1> Hey Buddy!! Add Some Meal to your list </h1>
@@ -66,7 +65,10 @@ function addFavourites() {
   }
 }
 function toggleFavStyle(id) {
-  favArr = favArr.filter((item) => item !== id);
+  Array.prototype.remove = function (value) {
+    this.splice(this.indexOf(value), 1);
+  };
+  favArr.remove(id);
   localStorage.setItem("Favourites", JSON.stringify(favArr));
   mealsList.innerHTML = "";
   addFavourites();

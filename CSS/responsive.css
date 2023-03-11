@@ -36,7 +36,11 @@
 }
 @media (max-width: 500px) {
   .search-bar {
-    width: 22rem;
+    width: 16rem;
     left: 3rem;
+  }
+  .search-btn {
+    position: relative;
+    left: -68px;
   }
 }

@@ -1,10 +1,23 @@
 const recipePage = document.getElementById("meal-detail");
 const recipeInstruction = document.getElementById("instruction");
 const ingredientList = document.getElementById("ingredent");
+const recipeContainer = document.getElementById("recipe-container");
 let eleArray = [];
 
 async function addMealDetail(id) {
-  console.log(id);
+  if (id === null || id === "") {
+    recipeContainer.innerHTML = `
+    <h1> Hey Buddy!! Please Select a Meal's View Recipe button to view the recipe </h1>
+    <a 
+    class="btn btn-warning" 
+    href="/index.html" 
+    role="button"
+    >Click Here to go to Search Page</a>`;
+    recipeContainer.style.margin = "2rem auto";
+    recipeContainer.style.width = "60%";
+    recipeContainer.style.fontFamily = "cursive";
+    return;
+  }
   const url = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + id;
   await fetch(url)
     .then((response) => {

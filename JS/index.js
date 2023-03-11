@@ -14,7 +14,6 @@ const fetchRandomly = () => {
       }
     })
     .then((obj) => {
-      console.log(obj);
       addFoodCards(obj.meals);
     })
     .catch((error) => {
@@ -54,7 +53,10 @@ function addFoodCards(eleArr) {
 }
 
 function applyFavChange(id) {
-  if (localStorage.getItem("Favourites").includes(id)) {
+  if (
+    localStorage.getItem("Favourites") !== null &&
+    localStorage.getItem("Favourites").includes(id)
+  ) {
     document.getElementById(id).getElementsByTagName("i")[1].style.display =
       "inline";
   }
@@ -115,7 +117,6 @@ async function fetchBySearchName(name) {
 }
 
 function addSearchList(eleArr) {
-  console.log(eleArr);
   if (eleArr === null) {
     searchListBox.innerHTML = "";
     return;
@@ -152,7 +153,6 @@ searchBar.addEventListener("click", () => {
 });
 
 function addSearchFoodCards() {
-  console.log(foodList);
   mealsList.innerHTML = "";
   if (foodList === null || foodList.length === 0) {
     mealsList.innerHTML = `
